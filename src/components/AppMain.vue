@@ -15,9 +15,19 @@ export default {
   methods: {
     searchTitle(title) {
       axios.get(`${store.url}${title}`).then((response) => {
-        store.resultslist = response.data.results
-
+        store.listMovies = response.data.results
+        axios.get(`${store.urlseries}${title}`).then((response) => {
+          store.listTv = response.data.results
+          axios.get(`${store.urlcountry}`).then((response) => {
+            store.listCountry = response.data
+          })
+        })
       })
+
+
+
+
+
     }
   }
 
@@ -37,5 +47,8 @@ export default {
   </main>
 </template>
 <style lang="scss" scoped>
-
+img {
+  width: 100%;
+  height: 80px;
+}
 </style>
