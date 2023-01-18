@@ -12,12 +12,25 @@ export default {
     return {
       store
     }
+  },
+  methods: {
+    searchTitle(title) {
+      axios.get(`${store.url}${title}`).then((response) => {
+        store.listMovies = response.data.results
+        axios.get(`${store.urlseries}${title}`).then((response) => {
+          store.listTv = response.data.results
+          axios.get(`${store.urlcountry}`).then((response) => {
+            store.listCountry = response.data
+          })
+        })
+      })
+    }
   }
 
 }
 </script>
 <template lang="">
-  <AppHeader />
+  <AppHeader @search="searchTitle"/>
   <AppMain />
 </template>
 <style lang="scss" >

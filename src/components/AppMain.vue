@@ -1,35 +1,14 @@
 <script>
 import { store } from '../store'
-import AppSearchBar from './AppSearchBar.vue'
 import AppList_Films from './AppList_Films.vue'
-import axios from 'axios'
 export default {
   components: {
-    AppSearchBar,
     AppList_Films
   }, data() {
     return {
       store
     }
   },
-  methods: {
-    searchTitle(title) {
-      axios.get(`${store.url}${title}`).then((response) => {
-        store.listMovies = response.data.results
-        axios.get(`${store.urlseries}${title}`).then((response) => {
-          store.listTv = response.data.results
-          axios.get(`${store.urlcountry}`).then((response) => {
-            store.listCountry = response.data
-          })
-        })
-      })
-
-
-
-
-
-    }
-  }
 
 }
 </script>
@@ -38,7 +17,6 @@ export default {
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <AppSearchBar  @search="searchTitle"/>
           <AppList_Films />
         </div>
       </div>
