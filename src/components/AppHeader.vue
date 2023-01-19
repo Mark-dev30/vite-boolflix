@@ -65,7 +65,7 @@ export default {
 }
 
 .content {
-  width: 60%;
+  width: 70%;
 }
 
 .list-menu {
