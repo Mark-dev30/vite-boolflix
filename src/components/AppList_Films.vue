@@ -1,8 +1,11 @@
 <script>
+/* Import swiper that allows me to scroll the images */
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { Pagination } from "swiper";
+import { FreeMode, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/free-mode";
+
 import AppCard from './AppCard.vue';
 import AppSerie from './AppSerie.vue'
 import { store } from '../store'
@@ -17,7 +20,7 @@ export default {
     data() {
         return {
             store,
-            modules: [Pagination]
+            modules: [FreeMode, Pagination]
         }
     }
 }
@@ -26,19 +29,17 @@ export default {
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h4>Lista film</h4>
+                <!-- container for the search result -->
                 <div class="content-list ">
-                    <div class="content-movie">
-                        <swiper :slidesPerView="4" :spaceBetween="20" :centeredSlides="true" :pagination="{clickable: true,}" :modules="modules" class="mySwiper">
+                    <!-- Container movie -->
+                    <div class="content-movie mb-4">
+                        <swiper :slidesPerView="5" :spaceBetween="30" :freeMode="true" :pagination="{clickable: true,}" :modules="modules" class="mySwiper">
                             <swiper-slide v-for="(item, index) in store.listMovies"><AppCard :card="item"/></swiper-slide>
                         </swiper>
                     </div>
-                    <!-- <div class="content-movie d-flex justify-content-between">
-                        <AppCard  v-for="(item, index) in store.listMovies" :key="index" :card="item"/>
-                    </div> -->
-                    <h4>Lista Serie Tv</h4>
+                    <!-- Container series tv -->
                     <div class="content-tv">
-                        <swiper :slidesPerView="4" :spaceBetween="30" :centeredSlides="true" :pagination="{clickable: true,}" :modules="modules" class="mySwiper">
+                        <swiper :slidesPerView="5" :spaceBetween="30" :freeMode="true" :pagination="{clickable: true,}" :modules="modules" class="mySwiper">
                             <swiper-slide v-for="item in store.listTv"><AppSerie :card="item"/></swiper-slide>
                         </swiper>
                     </div>
@@ -48,13 +49,17 @@ export default {
     </div>
 </template>
 <style lang="scss" scoped>
-h4 {
-    color: white;
-}
-
 .content-movie,
 .content-tv {
-    height: 383px;
+    max-height: 500px;
+}
+
+.content-list {
+    padding: 50px 0;
+}
+
+h4 {
+    color: white;
 }
 
 .swiper {

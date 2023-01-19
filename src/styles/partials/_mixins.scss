@@ -1,0 +1,40 @@
+@use './variables' as *;
+
+/* Style cards */
+@mixin style-card {
+    .card {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        position: relative;
+        background-color: $color_black;
+    }
+
+    .card:hover {
+
+        .card-body {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            position: absolute;
+            display: block;
+        }
+    }
+
+    .card-body {
+        display: none;
+        overflow-y: hidden;
+    }
+
+    .color-yellow {
+        color: yellow;
+    }
+
+    p {
+        font-size: 12px;
+    }
+
+    .img-soon {
+        width: 100%;
+    }
+}
